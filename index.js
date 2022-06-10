@@ -28,10 +28,18 @@ async function runServer() {
         app.get("/", (req, res) => {
             res.send("Node is working");
         });
-        // All Portfolio Data
+        //  Portfolio Data
         app.get("/portfolio", async (req, res) => {
             const query = {};
-            const result = await portfolioCollection.find(query).toArray();
+            result = await portfolioCollection.find(query).toArray();
+            res.send(result);
+        });
+        //  Portfolio Data One
+        app.get("/portfolioOne", async (req, res) => {
+            const id = req.query.id;
+            const query = { _id: ObjectId(id) };
+            const result = await portfolioCollection.findOne(query);
+
             res.send(result);
         });
     } finally {
