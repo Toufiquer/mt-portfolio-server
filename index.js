@@ -42,6 +42,14 @@ async function runServer() {
 
             res.send(result);
         });
+
+        // Add contact
+        app.post("/contact", async (req, res) => {
+            const contact = req.body.contact;
+            // console.log(contact);
+            const result = await portfolioCollection.insertOne(contact);
+            return res.send({ result, success: true });
+        });
     } finally {
     }
 }
